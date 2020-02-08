@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>测试ajax()的get</title>
+    <script src="jquery-3.4.1.js"></script>
+    <script>
+    $(document).ready(function(){
+	$("button").click(function(){
+        $.ajax({
+            url:"/testAjaxGet",
+            type:"get",
+            data:getTestJson(),
+            dataType:"json",
+            success:function(data){
+			    alert("数据:\n" + data.name+"\n"+data.url);
+		    },
+            error:function(XMLHttpRequest, textStatus, errorThrown) {
+                //这个error函数调试时非常有用，如果解析不正确，将会弹出错误框
+            　　　alert(XMLHttpRequest.responseText);
+                  alert(XMLHttpRequest.status);
+                  alert(XMLHttpRequest.readyState);
+                  alert(textStatus); // parser error;
+            }
+        });
+         function getTestJson() {
+            var data = {
+                "name":"菜鸟教程",
+                "url":"123456",
+            };
+            return data;
+        }
+    });
+});
+
+</script>
+</head>
+<body>
+
+<button>发送一个HTTP AJAX-Get请求并获取返回结果</button>
+
+</body>
+</html>

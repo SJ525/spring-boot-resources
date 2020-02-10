@@ -1,0 +1,44 @@
+<!-- GET 方法传递参数格式如下： -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+</head>
+<body>
+
+<button onclick="getJson()">点击获取参数数据</button>
+<div id="app" style="display:none;">
+    {{info}}
+</div>
+<script type = "text/javascript">
+function getJson(){
+    var app=document.getElementById("app");
+    app.style.display="block";
+
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          info: null
+        }
+      },
+      mounted () {
+        axios
+          .get('/getJsonThree',{
+                  webName:'菜鸟教程',
+                    url:'www.Runoob.com'
+          })
+          .then(response => (this.info = response.data))
+          .catch(function (error) { // 请求失败处理
+            console.log(error);
+          });
+      }
+    })
+}
+
+</script>
+</body>
+</html>

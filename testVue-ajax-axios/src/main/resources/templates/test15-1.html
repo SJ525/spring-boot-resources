@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue测试实例1</title>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+<button onclick="getJson()">点击获取json数据</button>
+<div id="app" style="display:none;">
+    {{ info }}
+</div>
+<script type = "text/javascript">
+function getJson(){
+    //使得id="app"的div元素显示
+    var app=document.getElementById("app");
+    app.style.display='block';
+
+    //创建Vue对象，获取json数据
+    new Vue({
+    el: '#app',
+    data () {
+        return {
+        info: null
+        }
+    },
+    mounted () {
+        axios
+        .get('/getJsonTwo')
+        .then(response => (this.info = response.data))
+        .catch(function (error) { // 请求失败处理
+            console.log(error);
+        });
+    }
+    })
+}
+</script>
+</body>
+</html>

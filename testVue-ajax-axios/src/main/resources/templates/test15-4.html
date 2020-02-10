@@ -1,0 +1,41 @@
+<!-- POST 方法
+POST 实例 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue-post请求测试</title>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+</head>
+<body>
+<button onclick="getData()">获取后端传递来的数据</button>
+<div id="app" style="display:none;">
+  {{info}}
+</div>
+<script type = "text/javascript">
+function getData(){
+  //显示已隐藏的id为app的div
+  var app=document.getElementById("app");
+  app.style.display="block";
+  //创建Vue对象
+  new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .post('/postOne')
+      .then(response => (this.info = response.data))
+      .catch(function (error) { // 请求失败处理
+        console.log(error);
+      });
+  }
+})
+}
+</script>
+</body>
+</html>
